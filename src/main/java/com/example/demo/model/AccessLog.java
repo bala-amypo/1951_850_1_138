@@ -1,35 +1,43 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
-import lombok.*;
-
 import java.time.Instant;
 
-@Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class AccessLog {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    // Key used
-    @ManyToOne
-    @JoinColumn(name = "digital_key_id", nullable = false)
     private DigitalKey digitalKey;
-
-    // Guest attempting access
-    @ManyToOne
-    @JoinColumn(name = "guest_id", nullable = false)
     private Guest guest;
-
-    @Column(nullable = false)
     private Instant accessTime;
+    private String result;
 
-    private String result;   // SUCCESS / DENIED
+    public DigitalKey getDigitalKey() {
+        return digitalKey;
+    }
 
-    private String reason;   // optional explanation
+    public void setDigitalKey(DigitalKey digitalKey) {
+        this.digitalKey = digitalKey;
+    }
+
+    public Guest getGuest() {
+        return guest;
+    }
+
+    public void setGuest(Guest guest) {
+        this.guest = guest;
+    }
+
+    public Instant getAccessTime() {
+        return accessTime;
+    }
+
+    public void setAccessTime(Instant accessTime) {
+        this.accessTime = accessTime;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
 }
