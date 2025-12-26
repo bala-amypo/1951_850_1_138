@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import java.time.Instant;
 
 @Entity
-@Table(name = "key_share_requests")
 public class KeyShareRequest {
 
     @Id
@@ -22,6 +21,8 @@ public class KeyShareRequest {
 
     private Instant shareStart;
     private Instant shareEnd;
+
+    public KeyShareRequest() {}
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

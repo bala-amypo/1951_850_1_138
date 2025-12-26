@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import java.time.Instant;
 
 @Entity
-@Table(name = "access_logs")
 public class AccessLog {
 
     @Id
@@ -18,8 +17,9 @@ public class AccessLog {
     private Guest guest;
 
     private Instant accessTime;
-
     private String result;
+
+    public AccessLog() {}
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

@@ -1,16 +1,11 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.ManyToOne;
-
+import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "room_bookings")
 public class RoomBooking {
 
     @Id
@@ -18,14 +13,17 @@ public class RoomBooking {
     private Long id;
 
     private String roomNumber;
-
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
-
-    private boolean active;
+    private Boolean active = true;
 
     @ManyToOne
     private Guest guest;
+
+    @ManyToMany
+    private Set<Guest> roommates = new HashSet<>();
+
+    public RoomBooking() {}
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -39,9 +37,11 @@ public class RoomBooking {
     public LocalDate getCheckOutDate() { return checkOutDate; }
     public void setCheckOutDate(LocalDate checkOutDate) { this.checkOutDate = checkOutDate; }
 
-    public boolean isActive() { return active; }
-    public void setActive(boolean active) { this.active = active; }
+    public Boolean getActive() { return active; }
+    public void setActive(Boolean active) { this.active = active; }
 
     public Guest getGuest() { return guest; }
     public void setGuest(Guest guest) { this.guest = guest; }
+
+    public Set<Guest> getRoommates() { return roommates; }
 }
