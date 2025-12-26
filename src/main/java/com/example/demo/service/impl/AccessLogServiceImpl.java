@@ -7,10 +7,12 @@ import com.example.demo.repository.DigitalKeyRepository;
 import com.example.demo.repository.GuestRepository;
 import com.example.demo.repository.KeyShareRequestRepository;
 import com.example.demo.service.AccessLogService;
+import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.List;
 
+@Service
 public class AccessLogServiceImpl implements AccessLogService {
 
     private final AccessLogRepository accessLogRepository;
@@ -33,11 +35,13 @@ public class AccessLogServiceImpl implements AccessLogService {
     public AccessLog createLog(AccessLog log) {
 
         if (log.getAccessTime().isAfter(Instant.now())) {
-            throw new IllegalArgumentException("Access time cannot be in the future");
+            throw new IllegalArgumentException(
+                    "Access time cannot be in the future");
         }
 
-        DigitalKey key = digitalKeyRepository.findById(
-                log.getDigitalKey().getId()).orElse(null);
+        DigitalKey key = digitalKeyRepository
+                .findById(log.getDigitalKey().getId())
+                .orElse(null);
 
         if (key == null || !key.isActive()) {
             log.setResult("DENIED");

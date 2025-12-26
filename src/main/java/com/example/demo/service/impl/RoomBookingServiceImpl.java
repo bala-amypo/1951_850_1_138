@@ -4,9 +4,11 @@ import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.RoomBooking;
 import com.example.demo.repository.RoomBookingRepository;
 import com.example.demo.service.RoomBookingService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class RoomBookingServiceImpl implements RoomBookingService {
 
     private final RoomBookingRepository bookingRepository;
@@ -17,9 +19,9 @@ public class RoomBookingServiceImpl implements RoomBookingService {
 
     @Override
     public RoomBooking createBooking(RoomBooking booking) {
-        if (booking.getCheckInDate()
-                .isAfter(booking.getCheckOutDate())) {
-            throw new IllegalArgumentException("Check-in date must be before check-out date");
+        if (booking.getCheckInDate().isAfter(booking.getCheckOutDate())) {
+            throw new IllegalArgumentException(
+                    "Check-in date must be before check-out date");
         }
         return bookingRepository.save(booking);
     }

@@ -6,9 +6,11 @@ import com.example.demo.model.RoomBooking;
 import com.example.demo.repository.DigitalKeyRepository;
 import com.example.demo.repository.RoomBookingRepository;
 import com.example.demo.service.DigitalKeyService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class DigitalKeyServiceImpl implements DigitalKeyService {
 
     private final DigitalKeyRepository digitalKeyRepository;
@@ -40,7 +42,8 @@ public class DigitalKeyServiceImpl implements DigitalKeyService {
         return digitalKeyRepository
                 .findByBookingIdAndActiveTrue(bookingId)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("No active key for booking: " + bookingId));
+                        new ResourceNotFoundException(
+                                "No active key for booking: " + bookingId));
     }
 
     @Override
