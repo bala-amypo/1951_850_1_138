@@ -1,14 +1,24 @@
 package com.example.demo.model;
 
+import jakarta.persistence.*;
 import java.time.Instant;
 
+@Entity
+@Table(name = "digital_keys")
 public class DigitalKey {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String keyValue;
+
     private Instant issuedAt;
     private Instant expiresAt;
+
     private boolean active;
+
+    @ManyToOne
     private RoomBooking booking;
 
     public Long getId() { return id; }

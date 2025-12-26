@@ -2,7 +2,7 @@ package com.example.demo.model;
 
 import java.time.LocalDate;
 import java.util.List;
-
+@Entity
 public class RoomBooking {
 
     private Long id;
