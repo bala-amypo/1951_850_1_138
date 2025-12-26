@@ -1,36 +1,31 @@
 package com.example.demo.model;
 
-import java.time.LocalDate;
-import java.util.List;
+import java.time.Instant;
 
-public class RoomBooking {
+public class DigitalKey {
 
     private Long id;
-    private String roomNumber;
-    private LocalDate checkInDate;
-    private LocalDate checkOutDate;
-    private Guest guest;
-    private List<Guest> roommates;
+    private String keyValue;
+    private Instant issuedAt;
+    private Instant expiresAt;
     private boolean active;
+    private RoomBooking booking;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public String getRoomNumber() { return roomNumber; }
-    public void setRoomNumber(String roomNumber) { this.roomNumber = roomNumber; }
+    public String getKeyValue() { return keyValue; }
+    public void setKeyValue(String keyValue) { this.keyValue = keyValue; }
 
-    public LocalDate getCheckInDate() { return checkInDate; }
-    public void setCheckInDate(LocalDate checkInDate) { this.checkInDate = checkInDate; }
+    public Instant getIssuedAt() { return issuedAt; }
+    public void setIssuedAt(Instant issuedAt) { this.issuedAt = issuedAt; }
 
-    public LocalDate getCheckOutDate() { return checkOutDate; }
-    public void setCheckOutDate(LocalDate checkOutDate) { this.checkOutDate = checkOutDate; }
-
-    public Guest getGuest() { return guest; }
-    public void setGuest(Guest guest) { this.guest = guest; }
-
-    public List<Guest> getRoommates() { return roommates; }
-    public void setRoommates(List<Guest> roommates) { this.roommates = roommates; }
+    public Instant getExpiresAt() { return expiresAt; }
+    public void setExpiresAt(Instant expiresAt) { this.expiresAt = expiresAt; }
 
     public boolean isActive() { return active; }
     public void setActive(boolean active) { this.active = active; }
+
+    public RoomBooking getBooking() { return booking; }
+    public void setBooking(RoomBooking booking) { this.booking = booking; }
 }
