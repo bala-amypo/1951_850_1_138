@@ -10,6 +10,8 @@ public class RoomBooking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String roomNumber;   // ✅ REQUIRED
+
     @ManyToOne
     private Guest guest;
 
@@ -19,12 +21,22 @@ public class RoomBooking {
 
     public RoomBooking() {}
 
+    // ---------- getters & setters ----------
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getRoomNumber() {          // ✅ REQUIRED
+        return roomNumber;
+    }
+
+    public void setRoomNumber(String roomNumber) {   // ✅ REQUIRED
+        this.roomNumber = roomNumber;
     }
 
     public Guest getGuest() {
@@ -51,7 +63,7 @@ public class RoomBooking {
         this.checkOutDate = checkOutDate;
     }
 
-    public boolean isActive() {             // 🔥 REQUIRED
+    public boolean isActive() {
         return active;
     }
 
