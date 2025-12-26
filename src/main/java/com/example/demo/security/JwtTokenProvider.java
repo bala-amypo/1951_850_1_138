@@ -5,47 +5,40 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-import javax.crypto.SecretKey;
+import java.security.Key;
 import java.util.Date;
 
 @Component
 public class JwtTokenProvider {
 
-    private final SecretKey key =
-            Keys.hmacShaKeyFor(
-                    "mysecretkeymysecretkeymysecretkey123456"
-                            .getBytes());
-
-    private final long EXPIRATION = 1000 * 60 * 60; // 1 hour
+    private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    private final long expirationMs = 3600000; // 1 hour
 
     public String generateToken(Authentication authentication) {
-
-        String email = authentication.getName();
-        String role = authentication.getAuthorities()
-                .iterator()
-                .next()
-                .getAuthority();
+        CustomUserPrincipal principal =
+                (CustomUserPrincipal) authentication.getPrincipal();
 
         return Jwts.builder()
-                .setSubject(email)
-                .claim("role", role)
+                .setSubject(principal.getUsername())
+                .claim("userId", principal.getId())
+                .claim("role", principal.getRole())
                 .setIssuedAt(new Date())
-                .setExpiration(
-                        new Date(System.currentTimeMillis() + EXPIRATION))
+                .setExpiration(new Date(System.currentTimeMillis() + expirationMs))
                 .signWith(key)
                 .compact();
     }
 
     public boolean validateToken(String token) {
         try {
-            Jwts.parserBuilder()
-                    .setSigningKey(key)
-                    .build()
-                    .parseClaimsJws(token);
+            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
             return true;
-        } catch (JwtException | IllegalArgumentException e) {
+        } catch (Exception e) {
             return false;
         }
+    }
+
+    public Long getUserIdFromToken(String token) {
+        return getClaims(token).get("userId", Long.class);
     }
 
     public String getEmailFromToken(String token) {
@@ -54,11 +47,6 @@ public class JwtTokenProvider {
 
     public String getRoleFromToken(String token) {
         return getClaims(token).get("role", String.class);
-    }
-
-    public Long getUserIdFromToken(String token) {
-        // Test only checks NOT NULL
-        return 1L;
     }
 
     private Claims getClaims(String token) {
