@@ -6,20 +6,20 @@ import com.example.demo.repository.GuestRepository;
 import com.example.demo.repository.KeyShareRequestRepository;
 import com.example.demo.service.KeyShareRequestService;
 
-import java.time.Instant;
 import java.util.List;
 
 public class KeyShareRequestServiceImpl implements KeyShareRequestService {
 
-    private final KeyShareRequestRepository repository;
+    private final KeyShareRequestRepository keyShareRequestRepository;
     private final DigitalKeyRepository digitalKeyRepository;
     private final GuestRepository guestRepository;
 
     public KeyShareRequestServiceImpl(
-            KeyShareRequestRepository repository,
+            KeyShareRequestRepository keyShareRequestRepository,
             DigitalKeyRepository digitalKeyRepository,
             GuestRepository guestRepository) {
-        this.repository = repository;
+
+        this.keyShareRequestRepository = keyShareRequestRepository;
         this.digitalKeyRepository = digitalKeyRepository;
         this.guestRepository = guestRepository;
     }
@@ -27,25 +27,28 @@ public class KeyShareRequestServiceImpl implements KeyShareRequestService {
     @Override
     public KeyShareRequest createShareRequest(KeyShareRequest request) {
 
+        // ❌ sharedBy and sharedWith must not be same
         if (request.getSharedBy().equals(request.getSharedWith())) {
-            throw new IllegalArgumentException("sharedBy and sharedWith cannot be same");
+            throw new IllegalArgumentException(
+                    "sharedBy and sharedWith cannot be same");
         }
 
-        if (request.getShareEnd()
-                .isBefore(request.getShareStart())) {
-            throw new IllegalArgumentException("Share end must be after share start");
+        // ❌ shareEnd must be after shareStart
+        if (request.getShareEnd().isBefore(request.getShareStart())) {
+            throw new IllegalArgumentException(
+                    "Share end must be after share start");
         }
 
-        return repository.save(request);
+        return keyShareRequestRepository.save(request);
     }
 
     @Override
     public List<KeyShareRequest> getRequestsSharedBy(Long guestId) {
-        return repository.findBySharedById(guestId);
+        return keyShareRequestRepository.findBySharedById(guestId);
     }
 
     @Override
     public List<KeyShareRequest> getRequestsSharedWith(Long guestId) {
-        return repository.findBySharedWithId(guestId);
+        return keyShareRequestRepository.findBySharedWithId(guestId);
     }
 }

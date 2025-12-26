@@ -1,14 +1,13 @@
 package com.example.demo.service;
 
-import com.example.demo.model.DigitalKey;
-
+import com.example.demo.model.KeyShareRequest;
 import java.util.List;
 
-public interface DigitalKeyService {
+public interface KeyShareRequestService {
 
-    DigitalKey generateKey(Long bookingId);
+    KeyShareRequest createShareRequest(KeyShareRequest request);
 
-    DigitalKey getActiveKeyForBooking(Long bookingId);
+    List<KeyShareRequest> getRequestsSharedBy(Long guestId);
 
-    List<DigitalKey> getKeysForGuest(Long guestId);
+    List<KeyShareRequest> getRequestsSharedWith(Long guestId);
 }
