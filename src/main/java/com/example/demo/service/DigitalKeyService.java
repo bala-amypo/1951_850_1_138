@@ -1,9 +1,3 @@
-package com.example.demo.service;
-
-import com.example.demo.model.DigitalKey;
-
-import java.util.List;
-
 public interface DigitalKeyService {
 
     DigitalKey generateKey(Long bookingId);
@@ -11,4 +5,6 @@ public interface DigitalKeyService {
     DigitalKey getActiveKeyForBooking(Long bookingId);
 
     List<DigitalKey> getKeysForGuest(Long guestId);
+
+    DigitalKey getKeyById(Long id);
 }
