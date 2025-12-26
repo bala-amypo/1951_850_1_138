@@ -23,61 +23,23 @@ public class RoomBooking {
     @ManyToMany
     private Set<Guest> roommates = new HashSet<>();
 
-    public RoomBooking() {}
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Long getId() {
-        return id;
-    }
+    public String getRoomNumber() { return roomNumber; }
+    public void setRoomNumber(String roomNumber) { this.roomNumber = roomNumber; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public LocalDate getCheckInDate() { return checkInDate; }
+    public void setCheckInDate(LocalDate checkInDate) { this.checkInDate = checkInDate; }
 
-    public String getRoomNumber() {
-        return roomNumber;
-    }
+    public LocalDate getCheckOutDate() { return checkOutDate; }
+    public void setCheckOutDate(LocalDate checkOutDate) { this.checkOutDate = checkOutDate; }
 
-    public void setRoomNumber(String roomNumber) {
-        this.roomNumber = roomNumber;
-    }
+    public Boolean getActive() { return active; }
+    public void setActive(Boolean active) { this.active = active; }
 
-    public LocalDate getCheckInDate() {
-        return checkInDate;
-    }
+    public Guest getGuest() { return guest; }
+    public void setGuest(Guest guest) { this.guest = guest; }
 
-    public void setCheckInDate(LocalDate checkInDate) {
-        this.checkInDate = checkInDate;
-    }
-
-    public LocalDate getCheckOutDate() {
-        return checkOutDate;
-    }
-
-    public void setCheckOutDate(LocalDate checkOutDate) {
-        this.checkOutDate = checkOutDate;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public boolean isActive() {
-        return Boolean.TRUE.equals(active);
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    public Guest getGuest() {
-        return guest;
-    }
-
-    public void setGuest(Guest guest) {
-        this.guest = guest;
-    }
-
-    public Set<Guest> getRoommates() {
-        return roommates;
-    }
+    public Set<Guest> getRoommates() { return roommates; }
 }
