@@ -3,31 +3,33 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.sql.Timestamp;
+import java.time.Instant;
 
 @Entity
-@Table(name = "access_logs")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class AccessLog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Key used
     @ManyToOne
-    @JoinColumn(name = "digital_key_id")
+    @JoinColumn(name = "digital_key_id", nullable = false)
     private DigitalKey digitalKey;
 
+    // Guest attempting access
     @ManyToOne
-    @JoinColumn(name = "guest_id")
+    @JoinColumn(name = "guest_id", nullable = false)
     private Guest guest;
 
-    private Timestamp accessTime;
+    @Column(nullable = false)
+    private Instant accessTime;
 
-    private String result;
+    private String result;   // SUCCESS / DENIED
 
-    private String reason;
+    private String reason;   // optional explanation
 }
