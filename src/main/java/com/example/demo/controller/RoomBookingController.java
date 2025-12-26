@@ -1,13 +1,12 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.RoomBookingDTO;
 import com.example.demo.model.RoomBooking;
 import com.example.demo.service.RoomBookingService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/api/bookings")
+@RequestMapping("/bookings")
 public class RoomBookingController {
 
     private final RoomBookingService bookingService;
@@ -17,27 +16,11 @@ public class RoomBookingController {
     }
 
     @PostMapping
-    public RoomBooking create(@RequestBody RoomBooking booking) {
+    public RoomBooking create(@RequestBody RoomBookingDTO dto) {
+        RoomBooking booking = new RoomBooking();
+        booking.setRoomNumber(dto.getRoomNumber());
+        booking.setCheckInDate(dto.getCheckInDate());
+        booking.setCheckOutDate(dto.getCheckOutDate());
         return bookingService.createBooking(booking);
-    }
-
-    @GetMapping("/{id}")
-    public RoomBooking getById(@PathVariable Long id) {
-        return bookingService.getBookingById(id);
-    }
-
-    @GetMapping("/guest/{guestId}")
-    public List<RoomBooking> getByGuest(@PathVariable Long guestId) {
-        return bookingService.getBookingsForGuest(guestId);
-    }
-
-    @PutMapping("/{id}")
-    public RoomBooking update(@PathVariable Long id, @RequestBody RoomBooking booking) {
-        return bookingService.updateBooking(id, booking);
-    }
-
-    @PutMapping("/{id}/deactivate")
-    public void deactivate(@PathVariable Long id) {
-        bookingService.deactivateBooking(id);
     }
 }

@@ -1,33 +1,26 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.AccessLogDTO;
 import com.example.demo.model.AccessLog;
 import com.example.demo.service.AccessLogService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/api/access-logs")
+@RequestMapping("/logs")
 public class AccessLogController {
 
-    private final AccessLogService logService;
+    private final AccessLogService service;
 
-    public AccessLogController(AccessLogService logService) {
-        this.logService = logService;
+    public AccessLogController(AccessLogService service) {
+        this.service = service;
     }
 
     @PostMapping
-    public AccessLog create(@RequestBody AccessLog log) {
-        return logService.createLog(log);
-    }
-
-    @GetMapping("/key/{keyId}")
-    public List<AccessLog> getByKey(@PathVariable Long keyId) {
-        return logService.getLogsForKey(keyId);
-    }
-
-    @GetMapping("/guest/{guestId}")
-    public List<AccessLog> getByGuest(@PathVariable Long guestId) {
-        return logService.getLogsForGuest(guestId);
+    public AccessLog create(@RequestBody AccessLogDTO dto) {
+        AccessLog log = new AccessLog();
+        log.setDigitalKey(dto.getDigitalKey());
+        log.setGuest(dto.getGuest());
+        log.setAccessTime(dto.getAccessTime());
+        return service.createLog(log);
     }
 }
