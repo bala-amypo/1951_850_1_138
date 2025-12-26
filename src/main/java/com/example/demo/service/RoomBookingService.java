@@ -11,4 +11,8 @@ public interface RoomBookingService {
     RoomBooking updateBooking(Long id, RoomBooking booking);
 
     List<RoomBooking> getBookingsForGuest(Long guestId);
+
+    RoomBooking getBookingById(Long id);
+
+    void deactivateBooking(Long id);
 }

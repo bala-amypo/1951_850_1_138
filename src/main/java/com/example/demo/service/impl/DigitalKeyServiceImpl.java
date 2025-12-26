@@ -39,7 +39,7 @@ public class DigitalKeyServiceImpl implements DigitalKeyService {
         key.setBooking(booking);
         key.setKeyValue(UUID.randomUUID().toString());
         key.setIssuedAt(Instant.now());
-        key.setExpiresAt(Instant.now().plusSeconds(3600)); // 1 hour
+        key.setExpiresAt(Instant.now().plusSeconds(3600));
         key.setActive(true);
 
         return digitalKeyRepository.save(key);
@@ -55,5 +55,12 @@ public class DigitalKeyServiceImpl implements DigitalKeyService {
     @Override
     public List<DigitalKey> getKeysForGuest(Long guestId) {
         return digitalKeyRepository.findByBookingGuestId(guestId);
+    }
+
+    @Override
+    public DigitalKey getKeyById(Long id) {
+        return digitalKeyRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Digital key not found with id " + id));
     }
 }

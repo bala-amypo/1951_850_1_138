@@ -1,11 +1,11 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.*;
 import com.example.demo.repository.*;
 import com.example.demo.service.KeyShareRequestService;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -43,16 +43,12 @@ public class KeyShareRequestServiceImpl implements KeyShareRequestService {
                 .orElseThrow(() ->
                         new IllegalArgumentException("SharedWith guest not found"));
 
-        // ❌ Cannot share with self
         if (sharedBy.getId().equals(sharedWith.getId())) {
-            throw new IllegalArgumentException(
-                    "sharedBy and sharedWith cannot be the same");
+            throw new IllegalArgumentException("sharedBy and sharedWith cannot be the same");
         }
 
-        // ❌ Invalid time range
         if (request.getShareEnd().isBefore(request.getShareStart())) {
-            throw new IllegalArgumentException(
-                    "Share end time must be after share start");
+            throw new IllegalArgumentException("Share end time must be after share start");
         }
 
         request.setDigitalKey(key);
@@ -71,5 +67,19 @@ public class KeyShareRequestServiceImpl implements KeyShareRequestService {
     @Override
     public List<KeyShareRequest> getRequestsSharedWith(Long guestId) {
         return keyShareRequestRepository.findBySharedWithId(guestId);
+    }
+
+    @Override
+    public KeyShareRequest getShareRequestById(Long id) {
+        return keyShareRequestRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Share request not found with id " + id));
+    }
+
+    @Override
+    public KeyShareRequest updateStatus(Long id, String status) {
+        KeyShareRequest req = getShareRequestById(id);
+        req.setStatus(status);
+        return keyShareRequestRepository.save(req);
     }
 }

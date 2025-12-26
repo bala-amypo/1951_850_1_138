@@ -11,4 +11,8 @@ public interface KeyShareRequestService {
     List<KeyShareRequest> getRequestsSharedBy(Long guestId);
 
     List<KeyShareRequest> getRequestsSharedWith(Long guestId);
+
+    KeyShareRequest getShareRequestById(Long id);
+
+    KeyShareRequest updateStatus(Long id, String status);
 }

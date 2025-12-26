@@ -30,9 +30,7 @@ public class RoomBookingServiceImpl implements RoomBookingService {
     @Override
     public RoomBooking updateBooking(Long id, RoomBooking update) {
 
-        RoomBooking existing = roomBookingRepository.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("Booking not found with id " + id));
+        RoomBooking existing = getBookingById(id);
 
         if (update.getCheckInDate().isAfter(update.getCheckOutDate())) {
             throw new IllegalArgumentException("Check-in date must be before check-out date");
@@ -47,5 +45,19 @@ public class RoomBookingServiceImpl implements RoomBookingService {
     @Override
     public List<RoomBooking> getBookingsForGuest(Long guestId) {
         return roomBookingRepository.findByGuestId(guestId);
+    }
+
+    @Override
+    public RoomBooking getBookingById(Long id) {
+        return roomBookingRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Booking not found with id " + id));
+    }
+
+    @Override
+    public void deactivateBooking(Long id) {
+        RoomBooking booking = getBookingById(id);
+        booking.setActive(false);
+        roomBookingRepository.save(booking);
     }
 }
