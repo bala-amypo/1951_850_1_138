@@ -1,11 +1,18 @@
 package com.example.demo.model;
 
+import jakarta.persistence.*;
 import java.util.Objects;
 
+@Entity
 public class Guest {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(unique = true)
     private String email;
+
     private String password;
     private String fullName;
     private String phoneNumber;
@@ -15,10 +22,6 @@ public class Guest {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getEmail() {
@@ -77,7 +80,7 @@ public class Guest {
         this.role = role;
     }
 
-    // Needed for Many-to-Many uniqueness test
+    // Needed for Set uniqueness
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
