@@ -13,7 +13,8 @@ public class DigitalKey {
     private String keyValue;
     private Instant issuedAt;
     private Instant expiresAt;
-    private Boolean active = true;
+
+    private boolean active = true;
 
     @ManyToOne
     private RoomBooking booking;
@@ -30,8 +31,8 @@ public class DigitalKey {
     public Instant getExpiresAt() { return expiresAt; }
     public void setExpiresAt(Instant expiresAt) { this.expiresAt = expiresAt; }
 
-    public Boolean getActive() { return active; }
-    public void setActive(Boolean active) { this.active = active; }
+    public boolean isActive() { return active; }
+    public void setActive(boolean active) { this.active = active; }
 
     public RoomBooking getBooking() { return booking; }
     public void setBooking(RoomBooking booking) { this.booking = booking; }

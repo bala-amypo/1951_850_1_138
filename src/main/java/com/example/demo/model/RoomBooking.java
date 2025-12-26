@@ -15,7 +15,8 @@ public class RoomBooking {
     private String roomNumber;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
-    private Boolean active = true;
+
+    private boolean active = true;
 
     @ManyToOne
     private Guest guest;
@@ -35,8 +36,8 @@ public class RoomBooking {
     public LocalDate getCheckOutDate() { return checkOutDate; }
     public void setCheckOutDate(LocalDate checkOutDate) { this.checkOutDate = checkOutDate; }
 
-    public Boolean getActive() { return active; }
-    public void setActive(Boolean active) { this.active = active; }
+    public boolean isActive() { return active; }
+    public void setActive(boolean active) { this.active = active; }
 
     public Guest getGuest() { return guest; }
     public void setGuest(Guest guest) { this.guest = guest; }
