@@ -22,53 +22,19 @@ public class KeyShareRequest {
     private Instant shareStart;
     private Instant shareEnd;
 
-    public KeyShareRequest() {}
+    // GETTERS & SETTERS
+    public DigitalKey getDigitalKey() { return digitalKey; }
+    public void setDigitalKey(DigitalKey digitalKey) { this.digitalKey = digitalKey; }
 
-    public Long getId() {
-        return id;
-    }
+    public Guest getSharedBy() { return sharedBy; }
+    public void setSharedBy(Guest sharedBy) { this.sharedBy = sharedBy; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Guest getSharedWith() { return sharedWith; }
+    public void setSharedWith(Guest sharedWith) { this.sharedWith = sharedWith; }
 
-    public DigitalKey getDigitalKey() {
-        return digitalKey;
-    }
+    public Instant getShareStart() { return shareStart; }
+    public void setShareStart(Instant shareStart) { this.shareStart = shareStart; }
 
-    public void setDigitalKey(DigitalKey digitalKey) {
-        this.digitalKey = digitalKey;
-    }
-
-    public Guest getSharedBy() {
-        return sharedBy;
-    }
-
-    public void setSharedBy(Guest sharedBy) {
-        this.sharedBy = sharedBy;
-    }
-
-    public Guest getSharedWith() {
-        return sharedWith;
-    }
-
-    public void setSharedWith(Guest sharedWith) {
-        this.sharedWith = sharedWith;
-    }
-
-    public Instant getShareStart() {
-        return shareStart;
-    }
-
-    public void setShareStart(Instant shareStart) {
-        this.shareStart = shareStart;
-    }
-
-    public Instant getShareEnd() {
-        return shareEnd;
-    }
-
-    public void setShareEnd(Instant shareEnd) {
-        this.shareEnd = shareEnd;
-    }
+    public Instant getShareEnd() { return shareEnd; }
+    public void setShareEnd(Instant shareEnd) { this.shareEnd = shareEnd; }
 }

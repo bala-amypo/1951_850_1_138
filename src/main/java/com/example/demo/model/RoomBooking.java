@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class RoomBooking {
@@ -10,64 +11,30 @@ public class RoomBooking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String roomNumber;   // ✅ REQUIRED
-
-    @ManyToOne
-    private Guest guest;
-
+    private String roomNumber;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private boolean active;
 
-    public RoomBooking() {}
+    @ManyToMany
+    private List<Guest> roommates;
 
-    // ---------- getters & setters ----------
+    // GETTERS & SETTERS
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Long getId() {
-        return id;
-    }
+    public String getRoomNumber() { return roomNumber; }
+    public void setRoomNumber(String roomNumber) { this.roomNumber = roomNumber; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public LocalDate getCheckInDate() { return checkInDate; }
+    public void setCheckInDate(LocalDate checkInDate) { this.checkInDate = checkInDate; }
 
-    public String getRoomNumber() {          // ✅ REQUIRED
-        return roomNumber;
-    }
+    public LocalDate getCheckOutDate() { return checkOutDate; }
+    public void setCheckOutDate(LocalDate checkOutDate) { this.checkOutDate = checkOutDate; }
 
-    public void setRoomNumber(String roomNumber) {   // ✅ REQUIRED
-        this.roomNumber = roomNumber;
-    }
+    public boolean isActive() { return active; }
+    public void setActive(boolean active) { this.active = active; }
 
-    public Guest getGuest() {
-        return guest;
-    }
-
-    public void setGuest(Guest guest) {
-        this.guest = guest;
-    }
-
-    public LocalDate getCheckInDate() {
-        return checkInDate;
-    }
-
-    public void setCheckInDate(LocalDate checkInDate) {
-        this.checkInDate = checkInDate;
-    }
-
-    public LocalDate getCheckOutDate() {
-        return checkOutDate;
-    }
-
-    public void setCheckOutDate(LocalDate checkOutDate) {
-        this.checkOutDate = checkOutDate;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
+    public List<Guest> getRoommates() { return roommates; }
+    public void setRoommates(List<Guest> roommates) { this.roommates = roommates; }
 }
