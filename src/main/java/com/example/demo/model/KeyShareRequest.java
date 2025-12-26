@@ -3,42 +3,41 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.sql.Timestamp;
+import java.time.Instant;
 
 @Entity
-@Table(name = "key_share_requests")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class KeyShareRequest {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Key being shared
     @ManyToOne
-    @JoinColumn(name = "digital_key_id")
+    @JoinColumn(name = "digital_key_id", nullable = false)
     private DigitalKey digitalKey;
 
+    // Owner of the key
     @ManyToOne
-    @JoinColumn(name = "shared_by")
+    @JoinColumn(name = "shared_by_id", nullable = false)
     private Guest sharedBy;
 
+    // Guest receiving access
     @ManyToOne
-    @JoinColumn(name = "shared_with")
+    @JoinColumn(name = "shared_with_id", nullable = false)
     private Guest sharedWith;
 
-    private Timestamp shareStart;
+    @Column(nullable = false)
+    private Instant shareStart;
 
-    private Timestamp shareEnd;
+    @Column(nullable = false)
+    private Instant shareEnd;
 
     private String status = "PENDING";
 
-    private Timestamp createdAt;
-
-    @PrePersist
-    public void onCreate() {
-        this.createdAt = new Timestamp(System.currentTimeMillis());
-    }
+    private Instant createdAt = Instant.now();
 }
