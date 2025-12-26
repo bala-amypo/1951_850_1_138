@@ -19,42 +19,18 @@ public class AccessLog {
     private Instant accessTime;
     private String result;
 
-    public AccessLog() {
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Long getId() {
-        return id;
-    }
+    public DigitalKey getDigitalKey() { return digitalKey; }
+    public void setDigitalKey(DigitalKey digitalKey) { this.digitalKey = digitalKey; }
 
-    public DigitalKey getDigitalKey() {
-        return digitalKey;
-    }
+    public Guest getGuest() { return guest; }
+    public void setGuest(Guest guest) { this.guest = guest; }
 
-    public void setDigitalKey(DigitalKey digitalKey) {
-        this.digitalKey = digitalKey;
-    }
+    public Instant getAccessTime() { return accessTime; }
+    public void setAccessTime(Instant accessTime) { this.accessTime = accessTime; }
 
-    public Guest getGuest() {
-        return guest;
-    }
-
-    public void setGuest(Guest guest) {
-        this.guest = guest;
-    }
-
-    public Instant getAccessTime() {
-        return accessTime;
-    }
-
-    public void setAccessTime(Instant accessTime) {
-        this.accessTime = accessTime;
-    }
-
-    public String getResult() {
-        return result;
-    }
-
-    public void setResult(String result) {
-        this.result = result;
-    }
+    public String getResult() { return result; }
+    public void setResult(String result) { this.result = result; }
 }
