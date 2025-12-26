@@ -20,21 +20,55 @@ public class DigitalKey {
 
     public DigitalKey() {}
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getKeyValue() { return keyValue; }
-    public void setKeyValue(String keyValue) { this.keyValue = keyValue; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public Instant getIssuedAt() { return issuedAt; }
-    public void setIssuedAt(Instant issuedAt) { this.issuedAt = issuedAt; }
+    public String getKeyValue() {
+        return keyValue;
+    }
 
-    public Instant getExpiresAt() { return expiresAt; }
-    public void setExpiresAt(Instant expiresAt) { this.expiresAt = expiresAt; }
+    public void setKeyValue(String keyValue) {
+        this.keyValue = keyValue;
+    }
 
-    public Boolean getActive() { return active; }
-    public void setActive(Boolean active) { this.active = active; }
+    public Instant getIssuedAt() {
+        return issuedAt;
+    }
 
-    public RoomBooking getBooking() { return booking; }
-    public void setBooking(RoomBooking booking) { this.booking = booking; }
+    public void setIssuedAt(Instant issuedAt) {
+        this.issuedAt = issuedAt;
+    }
+
+    public Instant getExpiresAt() {
+        return expiresAt;
+    }
+
+    public void setExpiresAt(Instant expiresAt) {
+        this.expiresAt = expiresAt;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public boolean isActive() {
+        return Boolean.TRUE.equals(active);
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public RoomBooking getBooking() {
+        return booking;
+    }
+
+    public void setBooking(RoomBooking booking) {
+        this.booking = booking;
+    }
 }

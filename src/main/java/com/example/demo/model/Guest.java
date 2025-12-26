@@ -1,9 +1,6 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Guest {
@@ -12,16 +9,17 @@ public class Guest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String email;
+
     private String password;
     private String fullName;
     private String phoneNumber;
-    private String role;
-    private Boolean active = true;
     private Boolean verified = false;
+    private Boolean active = true;
+    private String role = "ROLE_USER";
 
-    public Guest() {
-    }
+    public Guest() {}
 
     public Long getId() {
         return id;
@@ -63,27 +61,35 @@ public class Guest {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getRole() {
-        return role;
+    public Boolean getVerified() {
+        return verified;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public boolean isVerified() {
+        return Boolean.TRUE.equals(verified);
+    }
+
+    public void setVerified(Boolean verified) {
+        this.verified = verified;
     }
 
     public Boolean getActive() {
         return active;
     }
 
+    public boolean isActive() {
+        return Boolean.TRUE.equals(active);
+    }
+
     public void setActive(Boolean active) {
         this.active = active;
     }
 
-    public Boolean getVerified() {
-        return verified;
+    public String getRole() {
+        return role;
     }
 
-    public void setVerified(Boolean verified) {
-        this.verified = verified;
+    public void setRole(String role) {
+        this.role = role;
     }
 }
