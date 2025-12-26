@@ -13,9 +13,9 @@
     <packaging>jar</packaging>
 
     <name>demo</name>
-    <description>Spring Boot + TestNG + JWT + MySQL</description>
+    <description>Spring Boot TestNG JWT MySQL Project</description>
 
-    <!-- ================= SPRING BOOT PARENT ================= -->
+    <!-- Spring Boot Parent -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -28,7 +28,6 @@
         <jjwt.version>0.9.1</jjwt.version>
     </properties>
 
-    <!-- ================= DEPENDENCIES ================= -->
     <dependencies>
 
         <!-- Core Spring -->
@@ -37,26 +36,26 @@
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
 
-        <!-- Web / REST -->
+        <!-- Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- Spring Data JPA -->
+        <!-- JPA -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!-- MySQL Driver -->
+        <!-- MySQL -->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Spring Security -->
+        <!-- Security -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
@@ -69,16 +68,14 @@
             <version>${jjwt.version}</version>
         </dependency>
 
-        <!-- Servlet API (Tomcat tests) -->
+        <!-- Servlet API -->
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
-        <!-- ================= TESTING ================= -->
-
-        <!-- Spring Boot Test (JUnit EXCLUDED) -->
+        <!-- Spring Boot Test (JUnit excluded) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -95,7 +92,7 @@
             </exclusions>
         </dependency>
 
-        <!-- TestNG (REQUIRED) -->
+        <!-- TestNG -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -107,33 +104,4 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-    </dependencies>
-
-    <!-- ================= BUILD ================= -->
-    <build>
-        <plugins>
-
-            <!-- Spring Boot Plugin -->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-
-            <!-- 🔥 FORCE TESTNG (MOST IMPORTANT) -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.2.5</version>
-                <configuration>
-                    <useModulePath>false</useModulePath>
-                    <testNGArtifactName>org.testng:testng</testNGArtifactName>
-                </configuration>
-            </plugin>
-
-        </plugins>
-    </build>
-
-</project>
+            <scope>test
