@@ -13,11 +13,13 @@ public class DigitalKey {
     private String keyValue;
     private Instant issuedAt;
     private Instant expiresAt;
+    private boolean active;     // ✅ ADD THIS
 
     @ManyToOne
     private RoomBooking booking;
 
-    // GETTERS & SETTERS
+    // ===== GETTERS & SETTERS =====
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -29,6 +31,10 @@ public class DigitalKey {
 
     public Instant getExpiresAt() { return expiresAt; }
     public void setExpiresAt(Instant expiresAt) { this.expiresAt = expiresAt; }
+
+    // ✅ REQUIRED BY ERRORS
+    public boolean isActive() { return active; }
+    public void setActive(boolean active) { this.active = active; }
 
     public RoomBooking getBooking() { return booking; }
     public void setBooking(RoomBooking booking) { this.booking = booking; }
