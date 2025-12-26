@@ -23,7 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         Guest guest = guestRepository.findByEmail(email)
                 .orElseThrow(() ->
-                        new UsernameNotFoundException("User not found: " + email));
+                        new UsernameNotFoundException(email));
 
         return new User(
                 guest.getEmail(),
