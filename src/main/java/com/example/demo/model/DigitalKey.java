@@ -1,41 +1,36 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
-import java.time.Instant;
+import java.time.LocalDate;
+import java.util.List;
 
-@Entity
-public class DigitalKey {
+public class RoomBooking {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String keyValue;
-    private Instant issuedAt;
-    private Instant expiresAt;
-    private boolean active;     // ✅ ADD THIS
-
-    @ManyToOne
-    private RoomBooking booking;
-
-    // ===== GETTERS & SETTERS =====
+    private String roomNumber;
+    private LocalDate checkInDate;
+    private LocalDate checkOutDate;
+    private Guest guest;
+    private List<Guest> roommates;
+    private boolean active;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public String getKeyValue() { return keyValue; }
-    public void setKeyValue(String keyValue) { this.keyValue = keyValue; }
+    public String getRoomNumber() { return roomNumber; }
+    public void setRoomNumber(String roomNumber) { this.roomNumber = roomNumber; }
 
-    public Instant getIssuedAt() { return issuedAt; }
-    public void setIssuedAt(Instant issuedAt) { this.issuedAt = issuedAt; }
+    public LocalDate getCheckInDate() { return checkInDate; }
+    public void setCheckInDate(LocalDate checkInDate) { this.checkInDate = checkInDate; }
 
-    public Instant getExpiresAt() { return expiresAt; }
-    public void setExpiresAt(Instant expiresAt) { this.expiresAt = expiresAt; }
+    public LocalDate getCheckOutDate() { return checkOutDate; }
+    public void setCheckOutDate(LocalDate checkOutDate) { this.checkOutDate = checkOutDate; }
 
-    // ✅ REQUIRED BY ERRORS
+    public Guest getGuest() { return guest; }
+    public void setGuest(Guest guest) { this.guest = guest; }
+
+    public List<Guest> getRoommates() { return roommates; }
+    public void setRoommates(List<Guest> roommates) { this.roommates = roommates; }
+
     public boolean isActive() { return active; }
     public void setActive(boolean active) { this.active = active; }
-
-    public RoomBooking getBooking() { return booking; }
-    public void setBooking(RoomBooking booking) { this.booking = booking; }
 }

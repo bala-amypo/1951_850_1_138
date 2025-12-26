@@ -1,25 +1,18 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@Entity
 public class RoomBooking {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String roomNumber;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
+    private Guest guest;
+    private List<Guest> roommates;
     private boolean active;
 
-    @ManyToMany
-    private List<Guest> roommates;
-
-    // GETTERS & SETTERS
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -32,9 +25,12 @@ public class RoomBooking {
     public LocalDate getCheckOutDate() { return checkOutDate; }
     public void setCheckOutDate(LocalDate checkOutDate) { this.checkOutDate = checkOutDate; }
 
-    public boolean isActive() { return active; }
-    public void setActive(boolean active) { this.active = active; }
+    public Guest getGuest() { return guest; }
+    public void setGuest(Guest guest) { this.guest = guest; }
 
     public List<Guest> getRoommates() { return roommates; }
     public void setRoommates(List<Guest> roommates) { this.roommates = roommates; }
+
+    public boolean isActive() { return active; }
+    public void setActive(boolean active) { this.active = active; }
 }
