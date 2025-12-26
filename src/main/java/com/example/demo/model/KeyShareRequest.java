@@ -1,7 +1,6 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.time.Instant;
 
 @Entity
 public class KeyShareRequest {
@@ -10,55 +9,41 @@ public class KeyShareRequest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private DigitalKey digitalKey;
+    private Long sharedById;
+    private Long sharedWithId;
+    private Long digitalKeyId;
 
-    @ManyToOne
-    private Guest sharedBy;
+    public KeyShareRequest() {}
 
-    @ManyToOne
-    private Guest sharedWith;
-
-    private Instant shareStart;
-    private Instant shareEnd;
-
-    public DigitalKey getDigitalKey() {
-        return digitalKey;
+    public Long getId() {
+        return id;
     }
 
-    public void setDigitalKey(DigitalKey digitalKey) {
-        this.digitalKey = digitalKey;
+    public void setId(Long id) {   // 🔥 REQUIRED
+        this.id = id;
     }
 
-    public Guest getSharedBy() {
-        return sharedBy;
+    public Long getSharedById() {
+        return sharedById;
     }
 
-    public void setSharedBy(Guest sharedBy) {
-        this.sharedBy = sharedBy;
+    public void setSharedById(Long sharedById) {
+        this.sharedById = sharedById;
     }
 
-    public Guest getSharedWith() {
-        return sharedWith;
+    public Long getSharedWithId() {
+        return sharedWithId;
     }
 
-    public void setSharedWith(Guest sharedWith) {
-        this.sharedWith = sharedWith;
+    public void setSharedWithId(Long sharedWithId) {
+        this.sharedWithId = sharedWithId;
     }
 
-    public Instant getShareStart() {
-        return shareStart;
+    public Long getDigitalKeyId() {
+        return digitalKeyId;
     }
 
-    public void setShareStart(Instant shareStart) {
-        this.shareStart = shareStart;
-    }
-
-    public Instant getShareEnd() {
-        return shareEnd;
-    }
-
-    public void setShareEnd(Instant shareEnd) {
-        this.shareEnd = shareEnd;
+    public void setDigitalKeyId(Long digitalKeyId) {
+        this.digitalKeyId = digitalKeyId;
     }
 }

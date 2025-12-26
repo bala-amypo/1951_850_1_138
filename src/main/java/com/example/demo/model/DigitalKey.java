@@ -1,8 +1,6 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.time.Instant;
-import java.util.UUID;
 
 @Entity
 public class DigitalKey {
@@ -11,46 +9,25 @@ public class DigitalKey {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String keyValue;
-    private Instant issuedAt;
-    private Instant expiresAt;
-    private boolean active = true;
+    private Long bookingId;
+    private boolean active;
 
-    @ManyToOne
-    private RoomBooking booking;
-
-    public DigitalKey() {
-        this.keyValue = UUID.randomUUID().toString();
-        this.issuedAt = Instant.now();
-        this.expiresAt = issuedAt.plusSeconds(3600);
-    }
+    public DigitalKey() {}
 
     public Long getId() {
         return id;
     }
 
-    public String getKeyValue() {
-        return keyValue;
+    public void setId(Long id) {   // 🔥 REQUIRED
+        this.id = id;
     }
 
-    public void setKeyValue(String keyValue) {
-        this.keyValue = keyValue;
+    public Long getBookingId() {
+        return bookingId;
     }
 
-    public Instant getIssuedAt() {
-        return issuedAt;
-    }
-
-    public void setIssuedAt(Instant issuedAt) {
-        this.issuedAt = issuedAt;
-    }
-
-    public Instant getExpiresAt() {
-        return expiresAt;
-    }
-
-    public void setExpiresAt(Instant expiresAt) {
-        this.expiresAt = expiresAt;
+    public void setBookingId(Long bookingId) {
+        this.bookingId = bookingId;
     }
 
     public boolean isActive() {
@@ -59,13 +36,5 @@ public class DigitalKey {
 
     public void setActive(boolean active) {
         this.active = active;
-    }
-
-    public RoomBooking getBooking() {
-        return booking;
-    }
-
-    public void setBooking(RoomBooking booking) {
-        this.booking = booking;
     }
 }

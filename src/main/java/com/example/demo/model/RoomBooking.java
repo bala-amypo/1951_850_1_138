@@ -1,9 +1,6 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 public class RoomBooking {
@@ -12,19 +9,25 @@ public class RoomBooking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long guestId;
     private String roomNumber;
-    private LocalDate checkInDate;
-    private LocalDate checkOutDate;
-    private boolean active = true;
 
-    @ManyToOne
-    private Guest guest;
-
-    @ManyToMany
-    private Set<Guest> roommates = new HashSet<>();
+    public RoomBooking() {}
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {   // 🔥 REQUIRED
+        this.id = id;
+    }
+
+    public Long getGuestId() {
+        return guestId;
+    }
+
+    public void setGuestId(Long guestId) {
+        this.guestId = guestId;
     }
 
     public String getRoomNumber() {
@@ -33,41 +36,5 @@ public class RoomBooking {
 
     public void setRoomNumber(String roomNumber) {
         this.roomNumber = roomNumber;
-    }
-
-    public LocalDate getCheckInDate() {
-        return checkInDate;
-    }
-
-    public void setCheckInDate(LocalDate checkInDate) {
-        this.checkInDate = checkInDate;
-    }
-
-    public LocalDate getCheckOutDate() {
-        return checkOutDate;
-    }
-
-    public void setCheckOutDate(LocalDate checkOutDate) {
-        this.checkOutDate = checkOutDate;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public Guest getGuest() {
-        return guest;
-    }
-
-    public void setGuest(Guest guest) {
-        this.guest = guest;
-    }
-
-    public Set<Guest> getRoommates() {
-        return roommates;
     }
 }
