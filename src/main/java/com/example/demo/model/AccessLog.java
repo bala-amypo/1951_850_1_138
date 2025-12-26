@@ -1,88 +1,59 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import java.time.Instant;
 
 @Entity
-public class Guest {
+public class AccessLog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String email;
-    private String password;
-    private String fullName;
-    private String phoneNumber;
-    private String role;
-    private Boolean active = true;
-    private Boolean verified = false;
+    @ManyToOne
+    private DigitalKey digitalKey;
 
-    public Guest() {}
+    @ManyToOne
+    private Guest guest;
+
+    private Instant accessTime;
+    private String result;
+
+    public AccessLog() {}
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public DigitalKey getDigitalKey() {
+        return digitalKey;
     }
 
-    public String getEmail() {
-        return email;
+    public void setDigitalKey(DigitalKey digitalKey) {
+        this.digitalKey = digitalKey;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public Guest getGuest() {
+        return guest;
     }
 
-    public String getPassword() {
-        return password;
+    public void setGuest(Guest guest) {
+        this.guest = guest;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public Instant getAccessTime() {
+        return accessTime;
     }
 
-    public String getFullName() {
-        return fullName;
+    public void setAccessTime(Instant accessTime) {
+        this.accessTime = accessTime;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public String getResult() {
+        return result;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    public Boolean getVerified() {
-        return verified;
-    }
-
-    public void setVerified(Boolean verified) {
-        this.verified = verified;
+    public void setResult(String result) {
+        this.result = result;
     }
 }
