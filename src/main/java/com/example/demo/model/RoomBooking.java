@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 public class RoomBooking {
@@ -9,8 +10,12 @@ public class RoomBooking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long guestId;
-    private String roomNumber;
+    @ManyToOne
+    private Guest guest;
+
+    private LocalDate checkInDate;
+    private LocalDate checkOutDate;
+    private boolean active;
 
     public RoomBooking() {}
 
@@ -18,23 +23,39 @@ public class RoomBooking {
         return id;
     }
 
-    public void setId(Long id) {   // 🔥 REQUIRED
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Long getGuestId() {
-        return guestId;
+    public Guest getGuest() {
+        return guest;
     }
 
-    public void setGuestId(Long guestId) {
-        this.guestId = guestId;
+    public void setGuest(Guest guest) {
+        this.guest = guest;
     }
 
-    public String getRoomNumber() {
-        return roomNumber;
+    public LocalDate getCheckInDate() {
+        return checkInDate;
     }
 
-    public void setRoomNumber(String roomNumber) {
-        this.roomNumber = roomNumber;
+    public void setCheckInDate(LocalDate checkInDate) {
+        this.checkInDate = checkInDate;
+    }
+
+    public LocalDate getCheckOutDate() {
+        return checkOutDate;
+    }
+
+    public void setCheckOutDate(LocalDate checkOutDate) {
+        this.checkOutDate = checkOutDate;
+    }
+
+    public boolean isActive() {             // 🔥 REQUIRED
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

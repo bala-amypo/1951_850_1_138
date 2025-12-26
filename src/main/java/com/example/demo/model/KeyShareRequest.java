@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import java.time.Instant;
 
 @Entity
 public class KeyShareRequest {
@@ -9,9 +10,17 @@ public class KeyShareRequest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long sharedById;
-    private Long sharedWithId;
-    private Long digitalKeyId;
+    @ManyToOne
+    private DigitalKey digitalKey;
+
+    @ManyToOne
+    private Guest sharedBy;
+
+    @ManyToOne
+    private Guest sharedWith;
+
+    private Instant shareStart;
+    private Instant shareEnd;
 
     public KeyShareRequest() {}
 
@@ -19,31 +28,47 @@ public class KeyShareRequest {
         return id;
     }
 
-    public void setId(Long id) {   // 🔥 REQUIRED
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Long getSharedById() {
-        return sharedById;
+    public DigitalKey getDigitalKey() {
+        return digitalKey;
     }
 
-    public void setSharedById(Long sharedById) {
-        this.sharedById = sharedById;
+    public void setDigitalKey(DigitalKey digitalKey) {
+        this.digitalKey = digitalKey;
     }
 
-    public Long getSharedWithId() {
-        return sharedWithId;
+    public Guest getSharedBy() {
+        return sharedBy;
     }
 
-    public void setSharedWithId(Long sharedWithId) {
-        this.sharedWithId = sharedWithId;
+    public void setSharedBy(Guest sharedBy) {
+        this.sharedBy = sharedBy;
     }
 
-    public Long getDigitalKeyId() {
-        return digitalKeyId;
+    public Guest getSharedWith() {
+        return sharedWith;
     }
 
-    public void setDigitalKeyId(Long digitalKeyId) {
-        this.digitalKeyId = digitalKeyId;
+    public void setSharedWith(Guest sharedWith) {
+        this.sharedWith = sharedWith;
+    }
+
+    public Instant getShareStart() {
+        return shareStart;
+    }
+
+    public void setShareStart(Instant shareStart) {
+        this.shareStart = shareStart;
+    }
+
+    public Instant getShareEnd() {
+        return shareEnd;
+    }
+
+    public void setShareEnd(Instant shareEnd) {
+        this.shareEnd = shareEnd;
     }
 }

@@ -9,7 +9,9 @@ public class DigitalKey {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long bookingId;
+    @ManyToOne
+    private RoomBooking booking;
+
     private boolean active;
 
     public DigitalKey() {}
@@ -18,16 +20,16 @@ public class DigitalKey {
         return id;
     }
 
-    public void setId(Long id) {   // 🔥 REQUIRED
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Long getBookingId() {
-        return bookingId;
+    public RoomBooking getBooking() {
+        return booking;
     }
 
-    public void setBookingId(Long bookingId) {
-        this.bookingId = bookingId;
+    public void setBooking(RoomBooking booking) {   // 🔥 REQUIRED
+        this.booking = booking;
     }
 
     public boolean isActive() {
