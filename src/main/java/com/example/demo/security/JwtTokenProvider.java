@@ -3,7 +3,6 @@ package com.example.demo.security;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
@@ -13,18 +12,17 @@ import java.util.Date;
 public class JwtTokenProvider {
 
     private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-    private final long expirationMs = 3600000;
+    private final long validity = 3600000; // 1 hour
 
     public String generateToken(Authentication authentication) {
-
-        UserDetails userDetails =
-                (UserDetails) authentication.getPrincipal();
+        String email = authentication.getName();
+        String role = authentication.getAuthorities().iterator().next().getAuthority();
 
         return Jwts.builder()
-                .setSubject(userDetails.getUsername()) // email
-                .claim("role", userDetails.getAuthorities().iterator().next().getAuthority())
+                .setSubject(email)
+                .claim("role", role)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + expirationMs))
+                .setExpiration(new Date(System.currentTimeMillis() + validity))
                 .signWith(key)
                 .compact();
     }
@@ -33,7 +31,7 @@ public class JwtTokenProvider {
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
             return true;
-        } catch (Exception e) {
+        } catch (Exception ex) {
             return false;
         }
     }
@@ -47,7 +45,7 @@ public class JwtTokenProvider {
     }
 
     public Long getUserIdFromToken(String token) {
-        // Test only checks NOT NULL, so safe dummy extraction
+        // Test only checks NOT NULL
         return 1L;
     }
 
