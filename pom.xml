@@ -103,32 +103,40 @@
 
     </dependencies>
 
-    <build>
-        <plugins>
+<build>
+    <plugins>
 
-            <!-- THIS IS THE MOST IMPORTANT PART -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.2.5</version>
-                <configuration>
-                    <testFailureIgnore>false</testFailureIgnore>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.surefire</groupId>
-                        <artifactId>surefire-testng</artifactId>
-                        <version>3.2.5</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
+        <!-- TestNG + Surefire (CRITICAL) -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.2.5</version>
 
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
+            <dependencies>
+                <dependency>
+                    <groupId>org.apache.maven.surefire</groupId>
+                    <artifactId>surefire-testng</artifactId>
+                    <version>3.2.5</version>
+                </dependency>
+            </dependencies>
 
-        </plugins>
-    </build>
+            <configuration>
+                <includes>
+                    <include>**/*Tests.java</include>
+                </includes>
+                <testNGArtifactName>org.testng:testng</testNGArtifactName>
+                <testFailureIgnore>false</testFailureIgnore>
+            </configuration>
+        </plugin>
+
+        <!-- Spring Boot -->
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+
+    </plugins>
+</build>
+
 `
 </project>
