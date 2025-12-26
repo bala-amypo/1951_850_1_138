@@ -1,8 +1,6 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 public class Guest {
@@ -19,34 +17,82 @@ public class Guest {
     private String phoneNumber;
     private String role = "ROLE_USER";
 
-    private boolean verified = false;
     private boolean active = true;
+    private boolean verified = false;
 
-    @ManyToMany(mappedBy = "roommates")
-    private Set<RoomBooking> bookings = new HashSet<>();
+    // ---------- getters & setters ----------
 
-    // getters & setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
+    public String getEmail() {
+        return email;
+    }
 
-    public String getFullName() { return fullName; }
-    public void setFullName(String fullName) { this.fullName = fullName; }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    public String getPhoneNumber() { return phoneNumber; }
-    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
+    public String getPassword() {
+        return password;
+    }
 
-    public String getRole() { return role; }
-    public void setRole(String role) { this.role = role; }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-    public boolean isVerified() { return verified; }
-    public void setVerified(boolean verified) { this.verified = verified; }
+    public String getFullName() {
+        return fullName;
+    }
 
-    public boolean isActive() { return active; }
-    public void setActive(boolean active) { this.active = active; }
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    // ✅ BOTH REQUIRED (tests + services)
+    public boolean isActive() {
+        return active;
+    }
+
+    public boolean getActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    // ✅ BOTH REQUIRED
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public boolean getVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
 }
