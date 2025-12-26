@@ -16,3 +16,19 @@ public interface RoomBookingService {
 
     void deactivateBooking(Long id);
 }
+
+
+package com.example.demo.service;
+
+import com.example.demo.model.RoomBooking;
+
+import java.util.List;
+
+public interface RoomBookingService {
+
+    RoomBooking createBooking(RoomBooking booking);
+
+    RoomBooking updateBooking(Long id, RoomBooking booking);
+
+    List<RoomBooking> getBookingsForGuest(Long guestId);
+}
