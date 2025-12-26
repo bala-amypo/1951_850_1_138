@@ -30,6 +30,11 @@ public class DigitalKey {
         return keyValue;
     }
 
+    // ✅ THIS WAS MISSING (TEST REQUIRES IT)
+    public void setKeyValue(String keyValue) {
+        this.keyValue = keyValue;
+    }
+
     public Instant getIssuedAt() {
         return issuedAt;
     }
