@@ -1,15 +1,34 @@
 package com.example.demo.dto;
 
-import lombok.Data;
 import java.time.LocalDate;
-import java.util.Set;
 
-@Data
 public class RoomBookingDTO {
-    private Long id;
+
     private String roomNumber;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
-    private Boolean active;
-    private Set<Long> roommateIds;
+
+    public String getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(String roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    public LocalDate getCheckInDate() {
+        return checkInDate;
+    }
+
+    public void setCheckInDate(LocalDate checkInDate) {
+        this.checkInDate = checkInDate;
+    }
+
+    public LocalDate getCheckOutDate() {
+        return checkOutDate;
+    }
+
+    public void setCheckOutDate(LocalDate checkOutDate) {
+        this.checkOutDate = checkOutDate;
+    }
 }

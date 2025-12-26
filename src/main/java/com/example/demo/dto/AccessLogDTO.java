@@ -1,14 +1,37 @@
 package com.example.demo.dto;
 
-import lombok.Data;
+import com.example.demo.model.DigitalKey;
+import com.example.demo.model.Guest;
+
 import java.time.Instant;
 
-@Data
 public class AccessLogDTO {
-    private Long id;
-    private Long digitalKeyId;
-    private Long guestId;
+
+    private DigitalKey digitalKey;
+    private Guest guest;
     private Instant accessTime;
-    private String result;
-    private String reason;
+
+    public DigitalKey getDigitalKey() {
+        return digitalKey;
+    }
+
+    public void setDigitalKey(DigitalKey digitalKey) {
+        this.digitalKey = digitalKey;
+    }
+
+    public Guest getGuest() {
+        return guest;
+    }
+
+    public void setGuest(Guest guest) {
+        this.guest = guest;
+    }
+
+    public Instant getAccessTime() {
+        return accessTime;
+    }
+
+    public void setAccessTime(Instant accessTime) {
+        this.accessTime = accessTime;
+    }
 }
