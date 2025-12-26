@@ -1,13 +1,24 @@
 package com.example.demo.model;
 
+import jakarta.persistence.*;
 import java.time.Instant;
 
+@Entity
+@Table(name = "access_logs")
 public class AccessLog {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
     private DigitalKey digitalKey;
+
+    @ManyToOne
     private Guest guest;
+
     private Instant accessTime;
+
     private String result;
 
     public Long getId() { return id; }
