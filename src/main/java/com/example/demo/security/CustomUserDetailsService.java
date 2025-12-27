@@ -29,4 +29,4 @@ public class CustomUserDetailsService implements UserDetailsService {
                 List.of(new SimpleGrantedAuthority(guest.getRole()))
         );
     }
-}
+}demo/src/main/java/com/example/demo/controller
