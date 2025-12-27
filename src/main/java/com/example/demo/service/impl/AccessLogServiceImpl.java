@@ -20,11 +20,10 @@ public class AccessLogServiceImpl implements AccessLogService {
     private final GuestRepository guestRepository;
     private final KeyShareRequestRepository keyShareRequestRepository;
 
-    public AccessLogServiceImpl(
-            AccessLogRepository accessLogRepository,
-            DigitalKeyRepository digitalKeyRepository,
-            GuestRepository guestRepository,
-            KeyShareRequestRepository keyShareRequestRepository) {
+    public AccessLogServiceImpl(AccessLogRepository accessLogRepository,
+                                DigitalKeyRepository digitalKeyRepository,
+                                GuestRepository guestRepository,
+                                KeyShareRequestRepository keyShareRequestRepository) {
         this.accessLogRepository = accessLogRepository;
         this.digitalKeyRepository = digitalKeyRepository;
         this.guestRepository = guestRepository;
@@ -35,15 +34,12 @@ public class AccessLogServiceImpl implements AccessLogService {
     public AccessLog createLog(AccessLog log) {
 
         if (log.getAccessTime().isAfter(Instant.now())) {
-            throw new IllegalArgumentException(
-                    "Access time cannot be in the future");
+            throw new IllegalArgumentException("Access time cannot be in the future");
         }
 
-        DigitalKey key = digitalKeyRepository
-                .findById(log.getDigitalKey().getId())
-                .orElse(null);
+        DigitalKey key = digitalKeyRepository.findById(log.getDigitalKey().getId()).orElse(null);
 
-        if (key == null || !key.isActive()) {
+        if (key == null || !key.getActive()) {
             log.setResult("DENIED");
         } else {
             log.setResult("SUCCESS");
@@ -53,12 +49,12 @@ public class AccessLogServiceImpl implements AccessLogService {
     }
 
     @Override
-    public List<AccessLog> getLogsForGuest(Long guestId) {
-        return accessLogRepository.findByGuestId(guestId);
+    public List<AccessLog> getLogsForKey(Long keyId) {
+        return accessLogRepository.findByDigitalKeyId(keyId);
     }
 
     @Override
-    public List<AccessLog> getLogsForKey(Long keyId) {
-        return accessLogRepository.findByDigitalKeyId(keyId);
+    public List<AccessLog> getLogsForGuest(Long guestId) {
+        return accessLogRepository.findByGuestId(guestId);
     }
 }
