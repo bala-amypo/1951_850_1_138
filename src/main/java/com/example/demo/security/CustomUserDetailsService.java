@@ -1,75 +1,32 @@
 package com.example.demo.security;
 
-import com.example.demo.model.AppUser;
-import com.example.demo.repository.AppUserRepository;
-import org.springframework.security.core.GrantedAuthority;
+import com.example.demo.model.Guest;
+import com.example.demo.repository.GuestRepository;
+import org.springframework.security.core.userdetails.*;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service   
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final AppUserRepository appUserRepository;
+    private final GuestRepository guestRepository;
 
-    public CustomUserDetailsService(AppUserRepository appUserRepository) {
-        this.appUserRepository = appUserRepository;
-    }
-package com.example.demo.security;
-
-import com.example.demo.model.User;
-import com.example.demo.repository.UserRepository;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-
-@Service
-public class CustomUserDetailsService implements UserDetailsService {
-
-    private final UserRepository userRepository;
-
-    public CustomUserDetailsService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public CustomUserDetailsService(GuestRepository guestRepository) {
+        this.guestRepository = guestRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
 
-        User user = userRepository.findByEmail(email)
+        Guest guest = guestRepository.findByEmail(email)
                 .orElseThrow(() ->
-                        new UsernameNotFoundException("User not found"));
-
-        return new org.springframework.security.core.userdetails.User(
-                user.getEmail(),
-                user.getPassword(),
-                List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole()))
-        );
-    }
-}
-
-    @Override
-    public UserDetails loadUserByUsername(String username)
-            throws UsernameNotFoundException {
-
-        AppUser user = appUserRepository.findByEmail(username)
-                .orElseThrow(() ->
-                        new UsernameNotFoundException("User not found"));
+                        new UsernameNotFoundException(email));
 
         return new User(
-                user.getEmail(),
-                user.getPassword(),
-                List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole()))
+                guest.getEmail(),
+                guest.getPassword(),
+                List.of(new SimpleGrantedAuthority(guest.getRole()))
         );
     }
 }
-
