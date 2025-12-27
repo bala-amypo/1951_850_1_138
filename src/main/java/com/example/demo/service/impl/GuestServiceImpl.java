@@ -31,21 +31,28 @@ public class GuestServiceImpl implements GuestService {
     }
 
     @Override
-    public Guest getGuestById(Long id) {
-        return guestRepository.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("Guest not found: " + id));
-    }
-
-    @Override
     public Guest updateGuest(Long id, Guest guest) {
-        Guest existing = getGuestById(id);
+        Guest existing = guestRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Guest not found: " + id));
+
         existing.setFullName(guest.getFullName());
         existing.setPhoneNumber(guest.getPhoneNumber());
         existing.setVerified(guest.isVerified());
         existing.setActive(guest.getActive());
         existing.setRole(guest.getRole());
+
         return guestRepository.save(existing);
+    }
+
+    @Override
+    public Guest getGuestById(Long id) {
+        return guestRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Guest not found: " + id));
+    }
+
+    @Override
+    public List<Guest> getAllGuests() {
+        return guestRepository.findAll();
     }
 
     @Override
@@ -53,10 +60,5 @@ public class GuestServiceImpl implements GuestService {
         Guest guest = getGuestById(id);
         guest.setActive(false);
         guestRepository.save(guest);
-    }
-
-    @Override
-    public List<Guest> getAllGuests() {
-        return guestRepository.findAll();
     }
 }
