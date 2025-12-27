@@ -1,32 +1,39 @@
 package com.example.demo.security;
 
-import com.example.demo.model.Guest;
-import com.example.demo.repository.GuestRepository;
-import org.springframework.security.core.userdetails.*;
+import com.example.demo.model.AppUser;
+import com.example.demo.repository.AppUserRepository;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service   
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final GuestRepository guestRepository;
+    private final AppUserRepository appUserRepository;
 
-    public CustomUserDetailsService(GuestRepository guestRepository) {
-        this.guestRepository = guestRepository;
+    public CustomUserDetailsService(AppUserRepository appUserRepository) {
+        this.appUserRepository = appUserRepository;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email)
+    public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
 
-        Guest guest = guestRepository.findByEmail(email)
+        AppUser user = appUserRepository.findByEmail(username)
                 .orElseThrow(() ->
-                        new UsernameNotFoundException(email));
+                        new UsernameNotFoundException("User not found"));
 
         return new User(
-                guest.getEmail(),
-                guest.getPassword(),
-                List.of(new SimpleGrantedAuthority(guest.getRole()))
+                user.getEmail(),
+                user.getPassword(),
+                List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole()))
         );
     }
 }
+
