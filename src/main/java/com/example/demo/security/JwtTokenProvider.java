@@ -1,8 +1,4 @@
-// =====================================================
-// FILE: JwtTokenProvider.java
-// PACKAGE: com.example.demo.security
-// PURPOSE: JWT creation + validation (TEST DEPENDS ON THIS)
-// =====================================================
+
 
 package com.example.demo.security;
 
